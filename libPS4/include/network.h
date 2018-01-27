@@ -64,6 +64,66 @@ struct sockaddr {
 
 typedef unsigned int socklen_t;
 
+/* info code */
+#define SCE_NET_CTL_INFO_DEVICE			1
+#define SCE_NET_CTL_INFO_ETHER_ADDR		2
+#define SCE_NET_CTL_INFO_MTU			3
+#define SCE_NET_CTL_INFO_LINK			4
+#define SCE_NET_CTL_INFO_BSSID			5
+#define SCE_NET_CTL_INFO_SSID			6
+#define SCE_NET_CTL_INFO_WIFI_SECURITY		7
+#define SCE_NET_CTL_INFO_RSSI_DBM		8
+#define SCE_NET_CTL_INFO_RSSI_PERCENTAGE	9
+#define SCE_NET_CTL_INFO_CHANNEL		10
+#define SCE_NET_CTL_INFO_IP_CONFIG		11
+#define SCE_NET_CTL_INFO_DHCP_HOSTNAME		12
+#define SCE_NET_CTL_INFO_PPPOE_AUTH_NAME	13
+#define SCE_NET_CTL_INFO_IP_ADDRESS		14
+#define SCE_NET_CTL_INFO_NETMASK		15
+#define SCE_NET_CTL_INFO_DEFAULT_ROUTE		16
+#define SCE_NET_CTL_INFO_PRIMARY_DNS		17
+#define SCE_NET_CTL_INFO_SECONDARY_DNS		18
+#define SCE_NET_CTL_INFO_HTTP_PROXY_CONFIG	19
+#define SCE_NET_CTL_INFO_HTTP_PROXY_SERVER	20
+#define SCE_NET_CTL_INFO_HTTP_PROXY_PORT	21
+#define SCE_NET_CTL_INFO_RESERVED1		22
+#define SCE_NET_CTL_INFO_RESERVED2		23
+
+#define SCE_NET_ETHER_ADDR_LEN 6
+
+typedef struct SceNetEtherAddr {
+	uint8_t data[SCE_NET_ETHER_ADDR_LEN];
+} SceNetEtherAddr;
+
+#define SCE_NET_CTL_SSID_LEN		(32 + 1)
+#define SCE_NET_CTL_HOSTNAME_LEN	(255 + 1)
+#define SCE_NET_CTL_AUTH_NAME_LEN	(127 + 1)
+#define SCE_NET_CTL_IPV4_ADDR_STR_LEN	(16)
+
+typedef union SceNetCtlInfo {
+	uint32_t device;
+	SceNetEtherAddr ether_addr;
+	uint32_t mtu;
+	uint32_t link;
+	SceNetEtherAddr bssid;
+	char ssid[SCE_NET_CTL_SSID_LEN];
+	uint32_t wifi_security;
+	uint8_t rssi_dbm;
+	uint8_t rssi_percentage;
+	uint8_t channel;
+	uint32_t ip_config;
+	char dhcp_hostname[SCE_NET_CTL_HOSTNAME_LEN];
+	char pppoe_auth_name[SCE_NET_CTL_AUTH_NAME_LEN];
+	char ip_address[SCE_NET_CTL_IPV4_ADDR_STR_LEN];
+	char netmask[SCE_NET_CTL_IPV4_ADDR_STR_LEN];
+	char default_route[SCE_NET_CTL_IPV4_ADDR_STR_LEN];
+	char primary_dns[SCE_NET_CTL_IPV4_ADDR_STR_LEN];
+	char secondary_dns[SCE_NET_CTL_IPV4_ADDR_STR_LEN];
+	uint32_t http_proxy_config;
+	char http_proxy_server[SCE_NET_CTL_HOSTNAME_LEN];
+	uint16_t http_proxy_port;
+} SceNetCtlInfo;
+
 extern int (*sceNetSocket)(const char *, int, int, int);
 extern int (*sceNetSocketClose)(int);
 extern int (*sceNetConnect)(int, struct sockaddr *, int);
@@ -87,5 +147,9 @@ extern uint16_t (*sceNetHtons)(uint16_t host16);
 extern uint64_t (*sceNetNtohll)(uint64_t net64);
 extern uint32_t (*sceNetNtohl)(uint32_t net32);
 extern uint16_t (*sceNetNtohs)(uint16_t net16);
+
+extern int (*sceNetCtlInit)(void);
+extern void (*sceNetCtlTerm)(void);
+extern int (*sceNetCtlGetInfo)(int code, SceNetCtlInfo *info);
 
 void initNetwork(void);

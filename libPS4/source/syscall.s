@@ -4,7 +4,7 @@
 
 #If your assembler complains about the following uncommented line change it to:
 #.section .sc_rop,"w"
-.section .sc_rop,"wb"
+.section .sc_rop,"w"
   syscall_rop: .quad 0
 
 .text

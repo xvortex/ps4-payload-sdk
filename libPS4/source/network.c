@@ -27,6 +27,10 @@ uint64_t (*sceNetNtohll)(uint64_t net64);
 uint32_t (*sceNetNtohl)(uint32_t net32);
 uint16_t (*sceNetNtohs)(uint16_t net16);
 
+int (*sceNetCtlInit)(void);
+void (*sceNetCtlTerm)(void);
+int (*sceNetCtlGetInfo)(int code, SceNetCtlInfo *info);
+
 void initNetwork(void) {
 	int libNet = sceKernelLoadStartModule("libSceNet.sprx", 0, NULL, 0, 0, 0);
 	
@@ -54,4 +58,10 @@ void initNetwork(void) {
 	RESOLVE(libNet, sceNetNtohll);
 	RESOLVE(libNet, sceNetNtohl);
 	RESOLVE(libNet, sceNetNtohs);
+
+	int libNetCtl = sceKernelLoadStartModule("libSceNetCtl.sprx", 0, NULL, 0, 0, 0);
+
+	RESOLVE(libNetCtl, sceNetCtlInit);
+	RESOLVE(libNetCtl, sceNetCtlTerm);
+	RESOLVE(libNetCtl, sceNetCtlGetInfo);
 }

@@ -6,7 +6,7 @@
 int (*sceSysUtilSendSystemNotificationWithText)(int messageType, char* message);
 
 void initSysUtil(void) {
-	int sysUtilHandle;
-	loadModule("/system/common/lib/libSceSysUtil.sprx", &sysUtilHandle);
+	int sysUtilHandle = sceKernelLoadStartModule("/system/common/lib/libSceSysUtil.sprx", 0, NULL, 0, 0, 0);
+
 	RESOLVE(sysUtilHandle, sceSysUtilSendSystemNotificationWithText);
 }

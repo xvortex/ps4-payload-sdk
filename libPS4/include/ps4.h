@@ -21,3 +21,4 @@
 #include "graphics.h"
 #include "jit.h"
 #include "sysutil.h"
+#include "dialog.h"

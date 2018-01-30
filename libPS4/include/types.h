@@ -10,6 +10,8 @@
 
 #define BIT(n) (1 << (n))
 
+typedef int bool;
+
 typedef uint64_t size_t;
 typedef int64_t ssize_t;
 typedef uint16_t wchar_t;

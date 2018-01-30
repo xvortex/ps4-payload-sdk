@@ -20,3 +20,4 @@
 #include "pad.h"
 #include "graphics.h"
 #include "jit.h"
+#include "sysutil.h"

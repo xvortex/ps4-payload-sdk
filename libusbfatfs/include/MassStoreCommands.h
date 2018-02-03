@@ -39,7 +39,7 @@
 	/* Includes: */
 		#include "SCSI_Codes.h"
  		#include <ps4.h>
- 		typedef unsigned char bool;
+ 		//typedef unsigned char bool; conflicting types for ‘bool’
 
 
 	/* Macros: */

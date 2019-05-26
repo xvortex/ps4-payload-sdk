@@ -28,6 +28,8 @@ extern int (*strncmp)(const char *s1, const char *s2, size_t n);
 extern int (*sprintf)(char *str, const char *format, ...);
 extern int (*snprintf)(char *str, size_t size, const char *format, ...);
 extern int (*sscanf)(const char *str, const char *format, ...);
+extern int (*strtol)(const char* s1, char** s2, int base);
+extern char *(*strtok)(char *str, const char *delimiters);
 extern char *(*strchr)(const char *s, int c);
 extern char *(*strrchr)(const char *s, int c);
 extern char *(*strstr)(char *str1, char *str2);

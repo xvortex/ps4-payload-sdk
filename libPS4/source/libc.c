@@ -90,8 +90,8 @@ void initLibc(void) {
 	RESOLVE(libc, sprintf);
 	RESOLVE(libc, snprintf);
 	RESOLVE(libc, sscanf);
-    RESOLVE(libc, strtol);
-    RESOLVE(libc, strtok);
+	RESOLVE(libc, strtol);
+	RESOLVE(libc, strtok);
 	RESOLVE(libc, strchr);
 	RESOLVE(libc, strrchr);
 	RESOLVE(libc, strstr);

@@ -21,6 +21,8 @@ int (*strncmp)(const char *s1, const char *s2, size_t n);
 int (*sprintf)(char *str, const char *format, ...);
 int (*snprintf)(char *str, size_t size, const char *format, ...);
 int (*sscanf)(const char *str, const char *format, ...);
+int (*strtol)(const char* s1, char** s2, int base);
+char *(*strtok)(char *str, const char *delimiters);
 char *(*strchr)(const char *s, int c);
 char *(*strrchr)(const char *s, int c);
 char *(*strstr)(char *str1, char *str2);
@@ -88,6 +90,8 @@ void initLibc(void) {
 	RESOLVE(libc, sprintf);
 	RESOLVE(libc, snprintf);
 	RESOLVE(libc, sscanf);
+	RESOLVE(libc, strtol);
+	RESOLVE(libc, strtok);
 	RESOLVE(libc, strchr);
 	RESOLVE(libc, strrchr);
 	RESOLVE(libc, strstr);
@@ -115,7 +119,7 @@ void initLibc(void) {
 	RESOLVE(libc, localtime);
 	RESOLVE(libc, localtime_r);
 	RESOLVE(libc, mktime);
-
+	
 	RESOLVE(libc, opendir);
 	RESOLVE(libc, readdir);
 	RESOLVE(libc, readdir_r);
@@ -124,9 +128,9 @@ void initLibc(void) {
 	RESOLVE(libc, rewinddir);
 	RESOLVE(libc, closedir);
 	RESOLVE(libc, dirfd);
-
+	
 	RESOLVE(libc, getprogname);
-
+	
 	RESOLVE(libc, fopen);
 	RESOLVE(libc, fread);
 	RESOLVE(libc, fwrite);
